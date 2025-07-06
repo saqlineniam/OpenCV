@@ -17,6 +17,8 @@ def create_train():
         for img in os.listdir(path):
             img_path = os.path.join(path, img)
             img_array = cv.imread(img_path)
+            # Resize image to 640x480
+            img_array = cv.resize(img_array, (640, 480))
 
             gray = cv.cvtColor(img_array, cv.COLOR_BGR2GRAY)
 
@@ -34,7 +36,7 @@ print(f'Length of labels: {len(labels)}')
 features = np.array(features, dtype=object)
 labels = np.array(labels)
 
-face_recognizer = cv.face.LBPHFaceRecognizer.create()
+face_recognizer = cv.face.LBPHFaceRecognizer_create()
 
 #train the recognizer on the features list and the labels list
 face_recognizer.train(features, np.array(labels))
